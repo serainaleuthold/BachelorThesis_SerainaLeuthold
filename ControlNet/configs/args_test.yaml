@@ -1,0 +1,83 @@
+# general training args
+train_num_steps: [20000]
+batch_size: 64
+data_folder: ./large_model/test_data/n_3.7_dL25/
+test_data_folder: ./large_model/test_data/Far_Ey.npy
+wl: 8.0e-07
+dL: 25
+total_sample_number: null
+gradient_accumulate_every: 1
+model_saving_path: ./large_model
+model_name: last_model
+save_name: control_waveynet_large
+ALPHA: 0.1
+cuda: 1
+
+# args for diffusion model:
+input_channels: 1
+Unet_dim: 128
+net_depth: 4
+block_depth: 4
+image_sizex: 32
+image_sizey: 96
+timesteps: 1000
+sampling_timesteps: 100
+
+# args for controlnet:
+control_input_channel: 2
+control_input_dim: 360
+control_hidden_dim: 256
+control_middel_channel: 32
+diffusion_locked: 1
+only_mid_control: 0
+farfield_name: 'Far_Ey'
+nearfield_name: 'Ey_out_forward_RI.npy'
+test_farfield_name: 'Far_Ey'
+use_nearfield: 0
+
+# args for optimizer:
+start_lr: [3.0e-04]
+end_lr: [1.0e-05]
+
+# args for sampling:
+num_samples: 1
+save_dir_samples: './large_model/samples'
+num_parallel_samples: 4
+batch_size_sampling: 1
+return_every_n_timestep: 100
+return_all_timesteps: False
+interpolate: False
+inverse_design: True
+analyse_w_original: False
+num_peaks: 1
+
+# args for near field and farfield simulation
+sample_every: 100
+n_mat: 3.7
+Nx: 250
+Ny: 250
+pml_x: 40
+pml_y: 40
+N_theta: 360
+train_sample_number: 4
+
+# other parameters
+continue_train: 0
+seed: 42
+
+# args for wandb:
+wandb_project: 'controlnet_waveynet_large'
+
+# inverse design superpixel
+min_angle: -45
+max_angle: 45
+N_data: 1
+
+data_save_dir: ./inverse_design
+half_spread: 20
+top_n: 1
+
+# args interpolation
+handcrafted: False
+num_devices_for_comparison: 4
+only_best_in_one_plot: True
